@@ -2,17 +2,17 @@
 
 ## Instruções inciais
 
-1. Clone esse repositório:
+**1.** Clone esse repositório:
 ````sh
 git clone https://github.com/eduardogdias/cp4_devops.git
 ````
 
-2. Entre no diretório do projeto que contenha o arquivo `docker-compose.yml`:
+**2.** Entre no diretório do projeto que contenha o arquivo `docker-compose.yml`:
 ````sh
 cd cp4_devops
 ````
 
-3. Crie um arquivo dentro do diretório chamado `.env` com o código abaixo:
+**3.** Crie um arquivo dentro do diretório chamado `.env` com o código abaixo:
 ````sh
 POSTGRES_DB=cp4_database
 POSTGRES_USER=cp4usu
@@ -27,7 +27,7 @@ A partir de agora todos os arquivos necessários para rodar o projeto em contain
 ---
 
 ## Subindo os serviços
-4. Suba os dois serviços em modo background (-d) com o comando abaixo e aguarde a contrução das imagens e criação dos containers:
+**4.** Suba os dois serviços em modo background (-d) com o comando abaixo e aguarde a contrução das imagens e criação dos containers:
 
 ````sh
 docker compose up -d --build
@@ -192,7 +192,7 @@ A API de JAVA faz o CRUD em 5 entidades e salva em duas respectivas tabelas:
 ## Desligando os serviços
 
 Você pode usar o comando ``docker compose down`` para encerrar os containers e a rede.
-Ou ainda, utulizar o sufixo ``-v`` que vai deletar todos os volumes criados por determinado serviço.
+Ou ainda, utulizar o sufixo `-v` que vai deletar todos os volumes criados por determinado serviço.
 
 ---
 
@@ -200,12 +200,14 @@ Ou ainda, utulizar o sufixo ``-v`` que vai deletar todos os volumes criados por 
 
 ### 1. Erro: psql: could not connect to server: Connection refused
 **Causa:** O banco ainda não terminou de inicializar antes da API tentar conectar.
+
 **Solução:** 
 Veja o log do banco (`docker compose logs postgres`), aguarde alguns segundos e reinicie apenas a API: `docker compose restart api`
 
 ### 2. Erro: role "cp4usu" does not exist
 
 **Causa:** O usuário do banco não foi criado corretamente.
+
 **Solução:**
 
 Verifique se o .env foi carregado corretamente.
@@ -220,6 +222,7 @@ docker compose up -d --build
 ### 3. Erro: Porta 5432 ou 8080 já está em uso
 
 **Causa:** Outro processo está usando essas portas.
+
 **Solução:**
 
 Verifique quais processos estão ocupando as portas:
@@ -234,6 +237,7 @@ Finalize o processo ou altere as portas no `docker-compose.yml`.
 ### 4. Erro: Dados do banco sumiram após remover e reinciar os containers
 
 **Causa:** O volume não foi removido.
+
 **Solução:**
 
 Provavelmente ao remover os container foi usado o comando:
