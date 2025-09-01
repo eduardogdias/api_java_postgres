@@ -1,0 +1,45 @@
+services:
+  postgres:
+    container_name: postgres
+    build:
+      context: .
+      dockerfile: Dockerfile.banco
+    ports:
+      - "5432:5432"
+    networks:
+      - cp4-network
+    volumes:
+      - postgres-cp4-volume:/var/lib/postgresql/data
+    restart: unless-stopped
+    env_file:
+      - .env  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:8080"
+    networks:
+      - cp4-network
+    env_file:
+      - .env
+    environment:
+      - NOME_SERVICO=postgres  
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+networks:
+  cp4-network:
+
+volumes:
+  postgres-cp4-volume:
