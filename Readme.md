@@ -1,4 +1,4 @@
-# CP4 - API + Banco Postgres + Dcocker Compose
+# CP4 - API + Banco Postgres + Docker Compose
 
 ## Instruções inciais
 
